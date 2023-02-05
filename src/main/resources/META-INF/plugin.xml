@@ -27,7 +27,7 @@
 
     <actions>
         <action class="app.action.GenerateAction" id="app.action.AddEntityAction" text="Generate" description="Generate" icon="AllIcons.Nodes.Class">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
+            <add-to-group group-id="CutCopyPasteGroup" anchor="first"/>
         </action>
     </actions>
 </idea-plugin>
