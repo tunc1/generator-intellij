@@ -1,5 +1,6 @@
 package app.action;
 
+import app.ui.View;
 import com.intellij.ide.projectView.ProjectView;
 import com.intellij.ide.projectView.impl.AbstractProjectViewPane;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -12,23 +13,25 @@ import java.util.List;
 
 public class GenerateAction extends AnAction
 {
-    private final GeneratorFacade generatorFacade;
-    private final String entityPackage="entity";
-    public GenerateAction()
-    {
-        generatorFacade=new GeneratorFacade();
-    }
+    private GeneratorFacade generatorFacade;
+    private View view;
     public void actionPerformed(@NotNull AnActionEvent e)
     {
-        String entityName=Messages.showInputDialog("Enter entity name","Generate",Messages.getQuestionIcon());
-        if(entityName!=null&&entityName.length()>0)
+		if(generatorFacade==null)
+			generatorFacade=new GeneratorFacade();
+		if(view==null)
+			view=new View();
+        view.show();
+        if(view.isOK())
         {
             try
             {
+                String[] entityNames=view.getEntityNames().split(",");
+                String entityPackage=view.getEntityPackage();
                 String projectPath=e.getProject().getBasePath();
                 AbstractProjectViewPane projectViewPane=ProjectView.getInstance(e.getProject()).getCurrentProjectViewPane();
                 String basePackageName=projectViewPane.getSelectedPath().getLastPathComponent().toString();
-                generatorFacade.generate(projectPath,basePackageName,entityPackage,List.of(entityName));
+                generatorFacade.generate(projectPath,basePackageName,entityPackage,List.of(entityNames));
                 Messages.showInfoMessage("Generated","Success");
             }
             catch(Exception ex)

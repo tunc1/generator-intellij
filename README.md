@@ -5,5 +5,5 @@ You can generate entities, repositories, services, controllers and unit tests fo
 ## Steps
 * 1 Right-click on the base package
 * 2 Click Generate
-* 3 Enter the entity name
+* 3 Enter entity names and entity package name
 * 4 Reload from Disk
