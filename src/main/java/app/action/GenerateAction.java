@@ -14,13 +14,11 @@ import java.util.List;
 public class GenerateAction extends AnAction
 {
     private GeneratorFacade generatorFacade;
-    private View view;
     public void actionPerformed(@NotNull AnActionEvent e)
     {
 		if(generatorFacade==null)
 			generatorFacade=new GeneratorFacade();
-		if(view==null)
-			view=new View();
+        View view=new View();
         view.show();
         if(view.isOK())
         {
